@@ -6,6 +6,6 @@ ws.on('connection',(socket)=>{
     
     socket.on('message', (data)=>{
         console.log(data);
-        socket.send(data);
+        ws.send(data);
     })
 })
