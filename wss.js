@@ -8,7 +8,9 @@ ws.on('connection',(socket)=>{
     
     socket.on('message', (data)=>{
         sockets.forEach((soc)=>{
-            soc.send(data)
+            if(soc != socket){
+                soc.send(data);
+            }
         })
     })
 })
