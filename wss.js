@@ -1,17 +1,15 @@
-import {WebSocketServer} from "https://deno.land/x/websocket@v0.1.4/mod.ts";
-const ws = new WebSocketServer(9090);
-const sockets =[];
+import {Server} from "npm:socket.io";
 
-ws.on('connection',(socket)=>{
-    console.log('new user connected');
-    sockets.push(socket);
-    
-    socket.on('message', (data)=>{
-        sockets.forEach((soc)=>{
-            if(soc != socket){
-                console.log(true)
-                soc.send(data);
-            }
-        })
-    })
-})
+const io = new Server(3000 , {
+    cors:{
+        origin:[`http://localhost:5173`]
+    }
+});
+
+io.on('connection',(socket)=>{
+    console.log(`New connection ${socket.id}`);
+
+    socket.on('msg',(msg)=>{
+        socket.broadcast.emit('msg',msg)
+    });
+});
