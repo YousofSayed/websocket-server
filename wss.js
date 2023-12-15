@@ -2,7 +2,7 @@ import {Server} from "npm:socket.io";
 
 const io = new Server(3000 , {
     cors:{
-        origin:['https://thunder-c2t.pages.dev','https://localhost:5173']
+        origin:['https://thunder-c2t.pages.dev','http://localhost:5173']
     }
 });
 
